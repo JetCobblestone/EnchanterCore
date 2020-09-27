@@ -1,0 +1,9 @@
+main: org.plugin.EnchanterCore
+name: "EnchanterCore"
+version: '0.1'
+author: JetCobblestone
+api-version: 1.13
+
+commands:
+  enchanter:
+
