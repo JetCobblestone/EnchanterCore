@@ -6,8 +6,9 @@ All versions after 1.8.9 are supported. If you use this API and you get the mess
 
 # How to use?
 This is an example of how to create an enchantment:
-
-private final static TagWrapper tagWrapper = TagManager.getInstance().getImplemenation(); private static CustomEnchantment myEnch;
+```java
+private final static TagWrapper tagWrapper = TagManager.getInstance().getImplemenation(); 
+private static CustomEnchantment myEnch;
 
 public static void loadEnchantments() {
 	force = new CustomEnchantment("MyEnchantment", 3, e -> {
@@ -20,6 +21,7 @@ public void onBlock (PlayerInteractEntityEvent event) {
 		myEnch.trigger(event);
 	};
 }
+```
 That's all you need to do!
 
 To add an enchantment to an item in game, you can use the command /enchanter enchant (Enchantment name) [level] To add an enchantment in the code you can use EnchantAdder.getInstance().getImplementation().addEnchant() To remove an enchantment to an item in game, you can use the command /enchanter remove (Enchantment name) To remove an enchantment in the code you can use EnchantAdder.getInstance().getImplementation().removeEnchant()
