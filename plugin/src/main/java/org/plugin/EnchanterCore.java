@@ -19,9 +19,7 @@ public class EnchanterCore extends JavaPlugin {
 		TagManager.getInstance().createInstance();
 		
 		getCommand("Enchanter").setExecutor(new CommandNode());
-		getServer().getPluginManager().registerEvents(new Enchantments(), this);
-		
-		Enchantments.loadEnchantments();
+
 	}
 	
 	@Override
