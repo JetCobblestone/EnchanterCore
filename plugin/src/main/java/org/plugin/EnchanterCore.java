@@ -15,15 +15,17 @@ public class EnchanterCore extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		
+		//Sets the version interface
 		TagManager.getInstance().createInstance();
 		
 		getCommand("Enchanter").setExecutor(new CommandNode());
+		getServer().getPluginManager().registerEvents(new Enchantments(), this);
+		
+		Enchantments.loadEnchantments();
 	}
 	
 	@Override
 	public void onDisable() {
 
 	}
-
-
 }

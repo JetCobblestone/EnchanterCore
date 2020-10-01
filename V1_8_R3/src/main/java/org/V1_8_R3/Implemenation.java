@@ -145,7 +145,6 @@ public class Implemenation implements TagWrapper{
 	public ItemStack removeGlow(ItemStack item) {
 		final net.minecraft.server.v1_8_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
 		final NBTTagCompound compound = (nmsItem.hasTag()) ? nmsItem.getTag() : new NBTTagCompound();
-		
 		compound.remove("ench");		
 		nmsItem.setTag(compound);
 		

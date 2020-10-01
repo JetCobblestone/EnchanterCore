@@ -3,6 +3,7 @@ package org.plugin.commands;
 import org.api.CustomEnchantment;
 import org.api.EnchantRegister;
 import org.api.ResponseManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,17 +20,20 @@ public class CommandNode implements CommandExecutor{
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String Label, String[] args) {
 		
+		
 		if (!(sender instanceof Player)) return false;
 		final Player player = (Player) sender;
 		if (!player.hasPermission("Enchanter")) {
 			player.sendMessage(ChatColor.RED + "ERROR: You do not have permission to use this command");
 			return false;
 		}
-		
+		if (args.length < 2) {
+			player.sendMessage("Command use incorrectly");
+			return false;
+		}
 		
 		if (args[0].equals("enchant")) {
 			
-			if (args[1] == null) return false;
 			
 			CustomEnchantment ench = EnchantRegister.enchFromName(args[1]);
 			if (ench == null) {
@@ -63,20 +67,19 @@ public class CommandNode implements CommandExecutor{
 		
 		
 		if (args[0].equals("remove")) {
-			
 			if (args[1] == null) return false;
 			
 			CustomEnchantment ench = EnchantRegister.enchFromName(args[1]);
 			if (ench == null) return false;
 			
-			final ItemStack item = enchantAdder.removeEnchant(player.getItemInHand(), ench);	
-			
+			final ItemStack item = enchantAdder.removeEnchant(player.getItemInHand(), ench);				
 			final int response = responseManager.getResponseId();
+			
 			if (response != 0) {
 				player.sendMessage(ChatColor.RED + "ERROR: " + responseManager.getResponses().get(response));
 				return false;
 			}
-			
+			Bukkit.getConsoleSender().sendMessage("" + item.getEnchantments());
 			player.setItemInHand(item);
 			return true;
 		}

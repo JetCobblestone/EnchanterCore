@@ -15,6 +15,7 @@ public interface EnchantAdder {
 	final LoreAdder loreAdder = LoreManager.getInstance().getLoreAdder();
 	final TagWrapper tagWrapper = TagManager.getInstance().getImplemenation();
 	
+	//Calls all the functions needed for fully adding an enchantment to an item
 	public default ItemStack addEnchant(ItemStack item, CustomEnchantment ench, int lvl) {
 		//Resetting response
 		responseManager.setResponseId(0);
@@ -37,6 +38,7 @@ public interface EnchantAdder {
 		return item;
 	}
 	
+	//Calls all the functions needed for fully removing an enchantment from an item.
 	public default ItemStack removeEnchant(ItemStack item, CustomEnchantment ench) {
 		//Resetting responses
 		responseManager.setResponseId(0);
@@ -51,7 +53,7 @@ public interface EnchantAdder {
 		//Tag should be removed before the lore
 		clone = tagWrapper.removeTag(clone, ench);
 		clone = loreAdder.removeLore(clone, ench);
-		
+
 		if (responseManager.getResponseId() == 0) {
 			item = clone;
 		}

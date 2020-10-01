@@ -14,11 +14,9 @@ import org.plugin.tagSystem.TagManager;
 public interface LoreAdder {
 	final TagWrapper tagWrapper = TagManager.getInstance().getImplemenation();
 	
+	//Adds the lore to an item. By default will make it look like vanilla.
 	default ItemStack addLore(ItemStack item, CustomEnchantment ench, int lvl){
-		
-		if (item.getEnchantments().isEmpty() 
-				&& tagWrapper.getTags(item).isEmpty()) 
-		{item = tagWrapper.addGlow(item);}
+		if (item.getEnchantments().isEmpty() && tagWrapper.getTags(item).isEmpty()) {item = tagWrapper.addGlow(item);}
 		
 		if (tagWrapper.checkTag(item, ench.getId())) {item = removeLore(item, ench);}
 	
@@ -35,6 +33,7 @@ public interface LoreAdder {
 		return item;
 	}
 	
+	//Searches for the name of the item in the lore and will remove it if an exact match is found.
 	default ItemStack removeLore(ItemStack item, CustomEnchantment ench) {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<String>();
@@ -56,8 +55,14 @@ public interface LoreAdder {
 		
 		meta.setLore(lore);
 		item.setItemMeta(meta);
-		
-		if (item.getEnchantments().isEmpty() && tagWrapper.getTags(item).isEmpty()){
+
+		if (tagWrapper.getTags(item).isEmpty()) {
+			if (TagManager.getInstance().getImplemenation().getClass() != org.V1_14_R1.Implemenation.class) {
+				if (!item.getEnchantments().isEmpty()) {
+					return item;
+				}
+			}
+			
 			item = tagWrapper.removeGlow(item);
 		}
 		

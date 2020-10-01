@@ -23,11 +23,13 @@ public class Implemenation implements TagWrapper{
 	private final NamespacedKey enchListKey;
 	private final NamespacedKey glowKey;
 	private final ResponseManager responseManager = ResponseManager.getInstance();
-
+	private final GlowEffect glow;
+	
 	public Implemenation(JavaPlugin plugin) {
 		this.plugin = plugin;
 		enchListKey = new NamespacedKey(plugin, "EnchanterEnchList");
 		glowKey = new NamespacedKey(plugin, "Glow");
+		glow = new GlowEffect(glowKey);
 		
 		try {
 			Field f = Enchantment.class.getDeclaredField("acceptingNew");
@@ -84,7 +86,7 @@ public class Implemenation implements TagWrapper{
 		final PersistentDataContainer pdc = item.getItemMeta().getPersistentDataContainer();
 		final ArrayList<CustomEnchantment> enchList = new ArrayList<>();
 		
-		if (!pdc.has(enchListKey, PersistentDataType.INTEGER_ARRAY)) return null;
+		if (!pdc.has(enchListKey, PersistentDataType.INTEGER_ARRAY)) return enchList;
 		
 		final int[] enchIdArray = pdc.get(enchListKey, PersistentDataType.INTEGER_ARRAY);
 		
@@ -97,7 +99,7 @@ public class Implemenation implements TagWrapper{
 
 	@Override
 	public ItemStack removeTag(ItemStack item, CustomEnchantment ench) {
-
+		Bukkit.getConsoleSender().sendMessage("jeff" + getTags(item));
 		if (!checkTag(item, ench.getId())){
 			responseManager.setResponseId(6);
 			return item;
@@ -106,12 +108,15 @@ public class Implemenation implements TagWrapper{
 		final ItemMeta itemMeta = item.getItemMeta();
 		final PersistentDataContainer pdc = itemMeta.getPersistentDataContainer();
 		final int[] enchArray = pdc.get(enchListKey, PersistentDataType.INTEGER_ARRAY);
-		final int[] newArray = new int[enchArray.length];
+		final int[] newArray = new int[enchArray.length-1];
+		int mod = 0;
 		
 		for (int i = 0; i < enchArray.length; i++) {
-			Bukkit.getConsoleSender().sendMessage("AIBFfqg");
-			if (enchArray[i] == ench.getId()) continue;
-			newArray[i] = enchArray[i];
+			if (enchArray[i] == ench.getId()) {
+				mod++;
+				continue;
+			}
+			newArray[i - mod] = enchArray[i];
 		}
 		
 		pdc.set(enchListKey, PersistentDataType.INTEGER_ARRAY, newArray);
@@ -161,7 +166,6 @@ public class Implemenation implements TagWrapper{
 
 	@Override
 	public ItemStack addGlow(ItemStack item) {
-		final GlowEffect glow = new GlowEffect(glowKey);
 		final ItemMeta meta = item.getItemMeta();
 		
 		meta.addEnchant(glow, 1, true);
@@ -172,12 +176,7 @@ public class Implemenation implements TagWrapper{
 
 	@Override
 	public ItemStack removeGlow(ItemStack item) {
-		final GlowEffect glow = new GlowEffect(glowKey);
-		final ItemMeta meta = item.getItemMeta();
-		
-		meta.removeEnchant(glow);
-		item.setItemMeta(meta);
-		
+		item.removeEnchantment(glow);
 		return item;
 	}
 }

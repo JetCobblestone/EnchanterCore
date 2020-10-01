@@ -6,6 +6,7 @@ import org.plugin.EnchanterCore;
 
 public class TagManager {
 
+	//Singleton class setup
 	private static TagManager instance;
 	private TagManager() {};
 	
@@ -16,10 +17,11 @@ public class TagManager {
 		return instance;
 	}
 	
-	
+	//Actual content
 	private TagWrapper implementation;	
 	private final String serverVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].substring(1);
 
+	//Sets the implementation vased on the version. 1.14+ uses the 1.14 implementation.
 	public void createInstance() {
 		try {
 			switch (serverVersion) {

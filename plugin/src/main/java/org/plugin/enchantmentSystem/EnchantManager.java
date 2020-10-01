@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.plugin.tagSystem.TagManager;
 
 public class EnchantManager {
+	//Singleton setup
 	private static EnchantManager instance;
 	private EnchantManager() {instance = this;}
 	
@@ -22,6 +23,7 @@ public class EnchantManager {
 		return instance;
 	}
 	
+	//Basically does the same as LoreManager, but it contains a couple of utility functions.
 	private class EnchantAdderImpl implements EnchantAdder {}
 	private EnchantAdder enchantAdder = new EnchantAdderImpl();
 	private ResponseManager responseManager = ResponseManager.getInstance();
@@ -30,6 +32,7 @@ public class EnchantManager {
 	public EnchantAdder getEnchantAdder() {
 		return enchantAdder;
 	}
+	
 	public void overrideEnchantAdder(EnchantAdder adder) {
 		enchantAdder = adder;
 	}

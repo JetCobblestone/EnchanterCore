@@ -4,6 +4,12 @@ import java.util.TreeMap;
 
 public class RomanNumeral {
 	
+	/**
+	Pinched from stack overflow ):
+	I don't understand how it works, but it does
+	Used for converting the level to roman numeral for the item lore
+	**/
+	
     private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 
     static {

@@ -1,0 +1,5 @@
+org\api\CustomEnchantment.class
+org\api\CustomEnchantment$Effect.class
+org\api\EnchantRegister.class
+org\api\ResponseManager.class
+org\api\TagWrapper.class

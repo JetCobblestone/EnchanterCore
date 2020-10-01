@@ -3,6 +3,7 @@ package org.api;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//Keeps track of the enchantments in lists to make them easy to access
 public class EnchantRegister {
 	private static HashMap<Integer, CustomEnchantment> idMap = new HashMap<Integer, CustomEnchantment>();
 	private static HashMap<String, CustomEnchantment> nameMap = new HashMap<String, CustomEnchantment>();

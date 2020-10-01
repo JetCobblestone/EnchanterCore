@@ -6,8 +6,11 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-
+/**My cool feedback system :D
+	A map of <Integer, Sting> links an id to an output message. This way if something goes wrong during the process of adding/removing an enchantment feedback as to what happened can be easily returned.
+ **/
 public class ResponseManager {
+	//Singleton setup
 	private static ResponseManager instance;
 	private ResponseManager() {
 		//default responses
@@ -31,11 +34,11 @@ public class ResponseManager {
 	
 	
 	private int responseId;
-	public int getResponseId() {return responseId;}
-	public void setResponseId(int responseId) {this.responseId = responseId;}
-	
-	
 	private Map<Integer, String> responses = new HashMap<Integer, String>();
+	
+	public int getResponseId() {return responseId;}
+	
+	public void setResponseId(int responseId) {this.responseId = responseId;}
 	
 	public Map<Integer, String> getResponses() {
 		return responses;

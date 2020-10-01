@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.inventory.ItemStack;
 
+//Versional interface. All version implementations implement this.
 public interface TagWrapper {
 	
 	public ItemStack setTag(ItemStack item, CustomEnchantment ench, int level);
