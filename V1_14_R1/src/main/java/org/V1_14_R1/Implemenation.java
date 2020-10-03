@@ -99,7 +99,6 @@ public class Implemenation implements TagWrapper{
 
 	@Override
 	public ItemStack removeTag(ItemStack item, CustomEnchantment ench) {
-		Bukkit.getConsoleSender().sendMessage("jeff" + getTags(item));
 		if (!checkTag(item, ench.getId())){
 			responseManager.setResponseId(6);
 			return item;
