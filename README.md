@@ -30,6 +30,9 @@ There is currenty no organic way to add enchantments and will have to be created
 
 The CustomEnchantment class should be safe to extend, though I haven't tested.
 
+# Warning
+If you change the name of an enchantment then any items with that enchantment on them will break, so please don't change the name of an enchantment after you have released it. Everything else you can change.
+
 # Contact me
 If you have any further questions on the functionality or capabilities, drop me a message on discord. If you want some additional functionality or any changes made, do the same. Discord: JetCobblestone#9979
 
